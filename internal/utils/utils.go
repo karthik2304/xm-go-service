@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/google/uuid"
