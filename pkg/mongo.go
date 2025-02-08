@@ -11,6 +11,7 @@ import (
 )
 
 func ConnectMongo() (*mongo.Database, error) {
+	// mongo
 	clientOptions := options.Client().ApplyURI(configs.Settings.MONGO_ADDR)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {

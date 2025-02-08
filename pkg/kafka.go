@@ -13,7 +13,6 @@ type KafkaWriter interface {
 	Close() error
 }
 
-// Define an interface for Kafka Reader
 type KafkaReader interface {
 	ReadMessage(ctx context.Context) (kafka.Message, error)
 	Close() error

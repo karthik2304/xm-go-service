@@ -12,7 +12,6 @@ import (
 func ConvertPayload(data Openapi.Event) ([]byte, error) {
 	msgBytes, err := json.Marshal(data)
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 	return msgBytes, nil
