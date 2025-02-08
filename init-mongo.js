@@ -40,4 +40,4 @@ const usersdata = [
 ]
 db.users.insertMany(usersdata)
 
-print("✅ MongoDB: Collections created successfully!");
+print("MongoDB: Collections created successfully!");

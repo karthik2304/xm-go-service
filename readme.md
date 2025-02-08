@@ -236,7 +236,13 @@ curl -X POST "http://localhost:9091/v1/create-company" \
 ---
 
 NOTE:
-1) by default 1 login user & 2 companies data created automatically by bootstrap script
+1) By default one login user & two companies data created automatically by bootstrap script in tables
+2) get jwt token calling Login API - use this payload in request body
+```bash
+{ "username": "xmtest@gmail.com", "password": "xmtest" }
+``` 
+3) Refer swagger file from api/v1/openapi.yaml
+4) Copy the file and Import it in https://editor.swagger.io/ for better understanding .
 
 This document should help you **set up, run, and test** the microservice easily! 🚀
 
