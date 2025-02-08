@@ -1,0 +1,695 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRUD - Company Microservices Golang",
+    "description": "List of API's supported for company record Creation",
+    "contact": {
+      "name": "KARTHIKEYAN C",
+      "email": "karthik.coumar20@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "CRUD API"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:9091"
+    }
+  ],
+  "paths": {
+    "/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "signUp",
+        "description": "SignUp for Creds",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SignUpBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "201": {
+            "$ref": "#/components/responses/Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "login",
+        "description": "Login for Creds",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SignUpBody"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JwtSuccess"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    },
+    "/v1/list-events": {
+      "get": {
+        "tags": [
+          "Log Events"
+        ],
+        "operationId": "List Events",
+        "description": "List all Events from Mutation",
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Events"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    },
+    "/v1/create-company": {
+      "post": {
+        "tags": [
+          "Company CRUD"
+        ],
+        "operationId": "createCompany",
+        "description": "Create Company Details",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CompanyRequestBody"
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    },
+    "/v1/company-details/{company_uuid}": {
+      "get": {
+        "tags": [
+          "Company CRUD"
+        ],
+        "operationId": "getCompanyDetails",
+        "description": "Get Company Details by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CompanyUUIDParam"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Company CRUD"
+        ],
+        "operationId": "updateCompanyDetails",
+        "description": "Update Company Details by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CompanyUUIDParam"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdatePayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JwtSuccess"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Company CRUD"
+        ],
+        "operationId": "deleteCompanyDetails",
+        "description": "Delete Company Details by Id",
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CompanyUUIDParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JwtSuccess"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    },
+    "/v1/list-companies": {
+      "get": {
+        "tags": [
+          "Company CRUD"
+        ],
+        "operationId": "listCompanies",
+        "description": "List All Company details",
+        "security": [
+          {
+            "BearerAuth": [
+              "things:w"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/CompanyListResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/FailureResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "CompanyUUIDParam": {
+        "name": "company_uuid",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Company UUID"
+      }
+    },
+    "schemas": {
+      "EventDetails": {
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "$ref": "#/components/schemas/CompanyName"
+          },
+          "companyUUID": {
+            "$ref": "#/components/schemas/CompanyUUID"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "registered": {
+            "$ref": "#/components/schemas/Registered"
+          },
+          "totalEmployees": {
+            "$ref": "#/components/schemas/TotalEmployees"
+          },
+          "type": {
+            "$ref": "#/components/schemas/type"
+          }
+        },
+        "required": [
+          "companyUUID",
+          "companyName",
+          "totalEmployees",
+          "registered",
+          "type"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "eventType": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "eventDetails": {
+            "$ref": "#/components/schemas/EventDetails"
+          }
+        },
+        "required": [
+          "id",
+          "eventType",
+          "userName"
+        ]
+      },
+      "UserName": {
+        "type": "string"
+      },
+      "Password": {
+        "type": "string"
+      },
+      "ApiResponse": {
+        "title": "ApiResponse",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "CompanyUUID": {
+        "title": "CompanyUUID",
+        "type": "string"
+      },
+      "CompanyName": {
+        "type": "string",
+        "maxLength": 15
+      },
+      "Description": {
+        "type": "string",
+        "maxLength": 3000
+      },
+      "TotalEmployees": {
+        "type": "integer",
+        "default": 0
+      },
+      "Registered": {
+        "type": "boolean"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "Corporations",
+          "NonProfit",
+          "Cooperative",
+          "Sole Proprietorship"
+        ]
+      },
+      "JwtResponse": {
+        "title": "JwtResponse",
+        "type": "object",
+        "properties": {
+          "jwt_token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "jwt_token"
+        ]
+      },
+      "Error": {
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "SignUpBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "SignUpBody",
+              "type": "object",
+              "properties": {
+                "username": {
+                  "$ref": "#/components/schemas/UserName"
+                },
+                "password": {
+                  "$ref": "#/components/schemas/Password"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "CompanyRequestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "CompanyRequestBody",
+              "type": "object",
+              "required": [
+                "companyUUID",
+                "companyName",
+                "totalEmployees",
+                "registered",
+                "type"
+              ],
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/EventDetails"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdatePayload": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "CompanyRequestBody",
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "$ref": "#/components/schemas/CompanyName"
+                },
+                "description": {
+                  "$ref": "#/components/schemas/Description"
+                },
+                "totalEmployees": {
+                  "$ref": "#/components/schemas/TotalEmployees"
+                },
+                "registered": {
+                  "$ref": "#/components/schemas/Registered"
+                },
+                "type": {
+                  "$ref": "#/components/schemas/type"
+                }
+              },
+              "required": [
+                "companyName",
+                "totalEmployees",
+                "registered",
+                "type"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Success": {
+        "description": "Operation was successful",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiResponse"
+            }
+          }
+        }
+      },
+      "JwtSuccess": {
+        "description": "Operation was successful",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/JwtResponse"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "The user not having the necessary permissions for a resource or needing an account of some sort, or attempting a prohibited action",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "FailureResponse": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "description": "Company Details Success Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyUUID": {
+                  "$ref": "#/components/schemas/CompanyUUID"
+                },
+                "companyName": {
+                  "$ref": "#/components/schemas/CompanyName"
+                },
+                "description": {
+                  "$ref": "#/components/schemas/Description"
+                },
+                "totalEmployees": {
+                  "$ref": "#/components/schemas/TotalEmployees"
+                },
+                "registered": {
+                  "$ref": "#/components/schemas/Registered"
+                },
+                "type": {
+                  "$ref": "#/components/schemas/type"
+                }
+              },
+              "required": [
+                "companyUUID",
+                "companyName",
+                "totalEmployees",
+                "registered",
+                "type"
+              ]
+            }
+          }
+        }
+      },
+      "Events": {
+        "description": "A list of event objects",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CompanyListResponse": {
+        "description": "List company details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "companyUUID": {
+                        "$ref": "#/components/schemas/CompanyUUID"
+                      },
+                      "companyName": {
+                        "$ref": "#/components/schemas/CompanyName"
+                      },
+                      "description": {
+                        "$ref": "#/components/schemas/Description"
+                      },
+                      "totalEmployees": {
+                        "$ref": "#/components/schemas/TotalEmployees"
+                      },
+                      "registered": {
+                        "$ref": "#/components/schemas/Registered"
+                      },
+                      "type": {
+                        "$ref": "#/components/schemas/type"
+                      }
+                    },
+                    "required": [
+                      "companyUUID",
+                      "companyName",
+                      "totalEmployees",
+                      "registered",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}

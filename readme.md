@@ -228,10 +228,10 @@ curl -X POST "http://localhost:9091/v1/create-company" \
 ```
 
 
-### Using Postman
-1. Import the OpenAPI specification.
-2. Use `http://localhost:9091` as the base URL.
-3. Include JWT tokens for protected routes.
+### For Testing via Postman
+1. Import the openapi-postman-collection.json document in collection
+2. It will Import API test routes for testing
+3. Include JWT tokens for protected routes inside {{bearerToken}} from Authorization.
 
 ---
 
